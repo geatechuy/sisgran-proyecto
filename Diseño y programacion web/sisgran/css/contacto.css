@@ -1,0 +1,49 @@
+/* MAIN */
+.contenedor{
+    margin: 0 auto;
+    width: 80%;
+}
+
+.titulo-seccion{
+    text-align: center;
+    padding: 15px 0;
+}
+
+/* FORMULARIO */
+.contenedor-inputs{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.campo{
+    display: grid;
+    grid-template-columns: 100px 350px;
+    align-items: center;
+}
+
+.campo:last-child{
+    align-items: flex-start;
+}
+
+.campo input, textarea{
+    padding: 5px;
+    width: 350px;
+    margin: 5px 0;
+}
+
+.campo label{
+    margin: 5px 0;
+}
+
+.campo textarea{
+    height: 250px;
+}
+
+.contenedor-botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}

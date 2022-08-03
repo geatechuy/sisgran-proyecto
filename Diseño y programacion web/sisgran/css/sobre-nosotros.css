@@ -1,0 +1,27 @@
+/* MAIN */
+.contenedor{
+    margin: 0 auto;
+    width: 80%;
+}
+
+.titulo-seccion{
+    text-align: center;
+    padding: 15px 0;
+}
+
+.sobre-nosotros{
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    gap: 10px;
+}
+
+.sobre-nosotros img{
+    width: 500px;
+}
+
+.sobre-nosotros p{
+    padding: 10px;
+    font-size: 20px;
+    text-align: justify;
+}

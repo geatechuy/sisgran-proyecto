@@ -1,0 +1,139 @@
+.contenedor{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    overflow-x: hidden;
+}
+
+.contenedor-imagen{
+    width: 50%;
+    height: 100%;
+    background-image: url('../images/imagen\ registro.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+}
+
+.contenedor-formulario{
+    width: 50%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 25% 65% 5%;
+    gap: 5px;
+}
+
+.cabecera-formulario{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo{
+    width: 400px;
+    height: auto;
+}
+
+.titulo{
+    font-weight: var(--bold);
+    font-size: 30px;
+}
+
+.subtitulo{
+    font-weight: var(--medium);
+    font-size: 20px;
+    margin: 5px;
+}
+
+.tipo-usuario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    list-style: none;
+}
+
+.tipo-usuario li{
+    cursor: pointer;
+}
+
+.activo-menu{
+    color: var(--verde);
+}
+
+.tipo-usuario li:hover{
+    color: var(--verdeClaro);
+}
+
+.formulario{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.campo-formulario{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 250px 250px;
+    margin: 7px 0;
+    align-items: center;
+}
+
+.campo-formulario input{
+    border: none;
+    border-bottom: 2px solid var(--gris);
+    padding: 5px;
+}
+
+.campo-formulario label{
+    font-size: 15px;
+}
+
+.campo-radio{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.campo-formulario.pasaporte{
+    grid-template-rows: 1;
+}
+
+.campo-formulario.pasaporte div{
+    display: flex;
+}
+
+.campo-formulario.pasaporte select{
+    width: 40px;
+    border: none;
+    border-bottom: 2px solid var(--gris);
+}
+
+.campo-formulario.pasaporte input{
+    width: 210px;
+}
+
+.pie-formulario{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.pie-formulario a{
+    color: var(--verde);
+    text-decoration: none;
+}
+
+.pie-formulario a:hover{
+    color: var(--verdeClaro);
+}
+
+/* UTILIDAD */
+.ocultar{
+    display: none; 
+}

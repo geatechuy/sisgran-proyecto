@@ -1,0 +1,77 @@
+.footer{
+    margin-top: 25px;
+    background-color: var(--gris);
+}
+
+.footer-grid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px;
+    gap: 20px;
+}
+
+.footer-title{
+    font-weight: var(--bold);
+    color: var(--verde);
+    font-size: 20px;
+    line-height: 2;
+}
+
+.footer-redes-sociales{
+    padding-top: 20px;
+}
+
+.footer-redes-sociales .icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+}
+
+.footer-redes-sociales .icons a{
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    color: var(--negro);
+}
+
+.fa-instagram, .fa-facebook-f{
+    transition: .3s transform ease-in-out;
+}
+
+.fa-instagram:hover{
+    transform: scale(1.1);
+    color: var(--instagram);
+}
+
+.fa-facebook-f:hover{
+    transform: scale(1.1);
+    color: var(--facebook);
+}
+
+.footer-geatech-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--negroClaro);
+}
+
+.footer-logo img{
+    width: 100%;
+}
+
+.footer-geatech-info p{
+    color: var(--gris);
+}
+
+.footer-geatech-info p a{
+    color: var(--verde);
+    text-decoration: none;
+}
+
+.footer-geatech-info p a:hover{
+    color: var(--verdeClaro);
+}
