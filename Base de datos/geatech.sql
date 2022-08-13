@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-08-2022 a las 01:12:59
+-- Tiempo de generación: 11-08-2022 a las 18:38:50
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,17 +20,6 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `geatech`
 --
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `almacena`
---
-
-CREATE TABLE `almacena` (
-  `IdVariedad` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada variedad',
-  `IdVegetal` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada vegetal'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -52,15 +41,35 @@ CREATE TABLE `asocia` (
 CREATE TABLE `calendario` (
   `IdVegetal` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada vegetal',
   `Metodo` varchar(25) NOT NULL COMMENT 'Es el método en el cual se cosechan las plantas',
-  `SiembraInicio` date NOT NULL COMMENT 'La fecha en que inicia la siembra ',
-  `SiembraFin` date NOT NULL COMMENT 'La fecha en la que finaliza la siembra ',
+  `SiembraInicio` datetime NOT NULL COMMENT 'La fecha en que inicia la siembra ',
+  `SiembraFin` datetime NOT NULL COMMENT 'La fecha en la que finaliza la siembra ',
   `ProfundidadSiembra` int(2) NOT NULL COMMENT 'Profundidad a la que se debe sembrar cada planta',
   `TTrasplantar` int(2) NOT NULL COMMENT 'Es el tiempo en que se deben trasplantar las plantas',
-  `IniGerminación` date NOT NULL COMMENT 'Fecha en la que inicia la germinación',
-  `FinGerminación` date NOT NULL COMMENT 'Fecha en la que finaliza la germinación',
+  `Germinación` int(3) NOT NULL COMMENT 'Fecha en la que inicia la germinación',
   `IniCosecha` date NOT NULL COMMENT 'Fecha en la que inicia la cosecha',
   `FinCosecha` date NOT NULL COMMENT 'Fecha en la que finaliza la cosecha'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cargo`
+--
+
+CREATE TABLE `cargo` (
+  `id` int(11) NOT NULL,
+  `descripcion` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `cargo`
+--
+
+INSERT INTO `cargo` (`id`, `descripcion`) VALUES
+(1, 'Informáticos'),
+(2, 'Directores'),
+(3, 'Administradores'),
+(4, 'Repartidor');
 
 -- --------------------------------------------------------
 
@@ -74,7 +83,8 @@ CREATE TABLE `cliente` (
   `Calle` varchar(70) NOT NULL COMMENT 'Calle en la que vive el cliente',
   `Esquina` varchar(70) NOT NULL COMMENT 'Esquina de la calle en la cual vive el cliente',
   `NroApt` int(3) DEFAULT NULL COMMENT 'Numero del apartamento donde vive el cliente',
-  `NroPuerta` int(4) NOT NULL COMMENT 'Número de puerta donde vive el cliente'
+  `NroPuerta` int(4) NOT NULL COMMENT 'Número de puerta donde vive el cliente',
+  `barrio` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -137,7 +147,7 @@ CREATE TABLE `cosecha` (
 CREATE TABLE `esta` (
   `NroOrden` int(3) NOT NULL COMMENT 'Número único que identifica cada Orden',
   `FechaIni` datetime(1) NOT NULL COMMENT 'Fecha en la que se inicia una orden',
-  `FechaFin` datetime(1) NOT NULL COMMENT 'Fecha en la que termina una orden',
+  `FechaFin` datetime(1) DEFAULT NULL COMMENT 'Fecha en la que termina una orden',
   `IdEstado` int(3) NOT NULL COMMENT 'Identificador único para ver en que estado están las ordenes'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -155,19 +165,6 @@ CREATE TABLE `estado` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `genera`
---
-
-CREATE TABLE `genera` (
-  `NroOrden` int(1) NOT NULL COMMENT 'Número único que identifica cada Orden',
-  `Fecha` datetime(1) NOT NULL COMMENT 'Fecha única en la que se genera una orden',
-  `IdVariedad` int(1) NOT NULL COMMENT 'Número único con el cual se identifica cada variedad',
-  `NroCliente` int(1) NOT NULL COMMENT 'Número único con el cual se identifica cada cliente'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `huerta`
 --
 
@@ -176,19 +173,10 @@ CREATE TABLE `huerta` (
   `NombreHuerta` varchar(70) NOT NULL COMMENT 'Nombre de la huerta',
   `Calle` varchar(70) NOT NULL COMMENT 'Calle donde se ubica la huerta',
   `NroPuerta` int(5) NOT NULL COMMENT 'Número de puerta donde se ubica la huerta',
-  `Esquina` varchar(70) NOT NULL COMMENT 'Esquina de la calle donde se ubica la huerta'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `miden`
---
-
-CREATE TABLE `miden` (
-  `IdVariedad` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada variedad',
-  `IdUnidad` int(3) NOT NULL COMMENT 'Identificador único de las unidades en la cual se miden los vegetales',
-  `IdVegetal` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada vegetal'
+  `Esquina` varchar(70) NOT NULL COMMENT 'Esquina de la calle donde se ubica la huerta',
+  `Tel` int(8) NOT NULL,
+  `Correo` varchar(200) NOT NULL,
+  `barrio` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -198,14 +186,9 @@ CREATE TABLE `miden` (
 --
 
 CREATE TABLE `orden` (
-  `NroOrden` int(3) NOT NULL COMMENT 'Número único de cada orden',
   `Fecha` datetime(1) NOT NULL COMMENT 'Fecha en la que se hacen las ordenes',
-  `Cant` int(2) NOT NULL COMMENT 'Cantidad de productos que se piden en las ordenes',
-  `PrecioUnitario` int(3) NOT NULL COMMENT 'Precio por cada producto',
-  `PrecioTotal` int(5) NOT NULL COMMENT 'Precio total de todos los productos de la orden',
-  `IdVariedad` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada variedad',
-  `IdVegetal` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada vegetal',
-  `NroCliente` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada cliente'
+  `Autoriszacion` int(1) NOT NULL,
+  `NroOrden` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -218,9 +201,10 @@ CREATE TABLE `pide` (
   `IdVariedad` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada variedad',
   `NroCliente` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada cliente',
   `Fecha` datetime(1) NOT NULL COMMENT 'Fecha en la que se hace el pedido',
-  `Autorizacion` int(1) NOT NULL COMMENT 'Esto es para ver si se autoriza la compra del cliente',
-  `CantProducto` int(1) NOT NULL COMMENT 'Cantidad de producto que pide el cliente',
-  `IdVegetal` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada vegetal'
+  `PrecioTotal` int(4) NOT NULL,
+  `Cant` int(3) NOT NULL,
+  `PrecioUnitario` int(3) NOT NULL,
+  `IdVegetal` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -231,7 +215,8 @@ CREATE TABLE `pide` (
 
 CREATE TABLE `produce` (
   `IdHuerta` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada huerta',
-  `IdVegetal` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada vegetal'
+  `IdVegetal` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada vegetal',
+  `Fecha` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -268,6 +253,39 @@ CREATE TABLE `unidad` (
   `IdUnidad` int(3) NOT NULL COMMENT 'Identificador único de cada unidad'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Volcado de datos para la tabla `unidad`
+--
+
+INSERT INTO `unidad` (`Tipo`, `IdUnidad`) VALUES
+('Kg', 1),
+('Atado', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(250) NOT NULL,
+  `Correo` varchar(200) NOT NULL,
+  `contraseña` varchar(250) NOT NULL,
+  `id_cargo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id`, `nombre`, `Correo`, `contraseña`, `id_cargo`) VALUES
+(1, 'Leonardo ', 'leoraidel11@gmail.com', 'Leo9903!', 1),
+(2, 'Andres ', 'andreseramos11@gmail.com', '12345678', 1),
+(3, 'Axel', 'axeldq2001@gmail.com', '12345678', 1),
+(4, 'Mauricio', 'mauriteijeiro@gmail.com', '12345678', 1),
+(5, 'Agustin', '2agustingomez3@gmail.com', '12345678', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -298,13 +316,6 @@ CREATE TABLE `vegetal` (
 --
 
 --
--- Indices de la tabla `almacena`
---
-ALTER TABLE `almacena`
-  ADD PRIMARY KEY (`IdVariedad`,`IdVegetal`),
-  ADD KEY `fk_Avv` (`IdVegetal`,`IdVariedad`) USING BTREE COMMENT 'Clave Foránea de almacena que llama a IdVegetal y a IdVariedad';
-
---
 -- Indices de la tabla `asocia`
 --
 ALTER TABLE `asocia`
@@ -316,6 +327,12 @@ ALTER TABLE `asocia`
 --
 ALTER TABLE `calendario`
   ADD PRIMARY KEY (`IdVegetal`);
+
+--
+-- Indices de la tabla `cargo`
+--
+ALTER TABLE `cargo`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `cliente`
@@ -334,7 +351,7 @@ ALTER TABLE `clienteempresa`
 -- Indices de la tabla `clientetel`
 --
 ALTER TABLE `clientetel`
-  ADD PRIMARY KEY (`NroCliente`);
+  ADD PRIMARY KEY (`NroCliente`,`Tel`);
 
 --
 -- Indices de la tabla `clienteweb`
@@ -346,9 +363,8 @@ ALTER TABLE `clienteweb`
 -- Indices de la tabla `cosecha`
 --
 ALTER TABLE `cosecha`
-  ADD PRIMARY KEY (`IdVariedad`,`IdVegetal`,`IdHuerta`),
-  ADD KEY `fk_Ch` (`IdHuerta`) USING BTREE COMMENT 'Clave Foránea de cosecha que llama a IdHuerta',
-  ADD KEY `fk_Cvv` (`IdVegetal`,`IdVariedad`) USING BTREE COMMENT 'Clave Foránea de cosecha que llama a IdVegetal y a IdVariedad';
+  ADD PRIMARY KEY (`IdHuerta`,`IdVegetal`,`IdVariedad`,`Fecha`),
+  ADD KEY `f_` (`IdVegetal`);
 
 --
 -- Indices de la tabla `esta`
@@ -364,47 +380,30 @@ ALTER TABLE `estado`
   ADD PRIMARY KEY (`IdEstado`);
 
 --
--- Indices de la tabla `genera`
---
-ALTER TABLE `genera`
-  ADD PRIMARY KEY (`NroOrden`,`Fecha`),
-  ADD KEY `fk_gVar` (`IdVariedad`) USING BTREE COMMENT 'Clave Foránea de genera que llama a IdVariedad',
-  ADD KEY `fk_gNoClie` (`NroCliente`) USING BTREE COMMENT 'Clave Foránea de genera que llama a NroCliente';
-
---
 -- Indices de la tabla `huerta`
 --
 ALTER TABLE `huerta`
   ADD PRIMARY KEY (`IdHuerta`);
 
 --
--- Indices de la tabla `miden`
---
-ALTER TABLE `miden`
-  ADD PRIMARY KEY (`IdUnidad`),
-  ADD KEY `fk_Mvv` (`IdVegetal`,`IdVariedad`) USING BTREE COMMENT 'Clave Foránea de miden que llama a IdVegetal y a IdVariedad';
-
---
 -- Indices de la tabla `orden`
 --
 ALTER TABLE `orden`
-  ADD PRIMARY KEY (`NroOrden`,`IdVariedad`,`IdVegetal`),
-  ADD KEY `ff-vv` (`IdVegetal`);
+  ADD PRIMARY KEY (`NroOrden`);
 
 --
 -- Indices de la tabla `pide`
 --
 ALTER TABLE `pide`
-  ADD PRIMARY KEY (`IdVariedad`,`IdVegetal`),
-  ADD KEY `fk_Pvv` (`IdVegetal`,`IdVariedad`) USING BTREE COMMENT 'Clave Foránea de pide que llama a IdVegetal y a IdVariedad',
-  ADD KEY `fk_PNroC` (`NroCliente`) USING BTREE COMMENT 'Clave Foránea de pide que llama a NroCliente';
+  ADD PRIMARY KEY (`IdVariedad`,`NroCliente`,`Fecha`,`IdVegetal`),
+  ADD KEY `fkvv` (`IdVegetal`,`IdVariedad`);
 
 --
 -- Indices de la tabla `produce`
 --
 ALTER TABLE `produce`
-  ADD PRIMARY KEY (`IdHuerta`,`IdVegetal`),
-  ADD KEY `fk_Pv` (`IdVegetal`) USING BTREE COMMENT 'Clave Foránea de produce que llama a IdVegetal';
+  ADD PRIMARY KEY (`IdHuerta`,`IdVegetal`,`Fecha`),
+  ADD KEY `fkVe` (`IdVegetal`);
 
 --
 -- Indices de la tabla `repartidor`
@@ -417,13 +416,20 @@ ALTER TABLE `repartidor`
 --
 ALTER TABLE `stock`
   ADD PRIMARY KEY (`IdVariedad`,`IdVegetal`),
-  ADD KEY `fk_Svv` (`IdVegetal`,`IdVariedad`) USING BTREE COMMENT 'Clave Foránea de stock que llama a IdVegetal y a IdVariedad';
+  ADD KEY `fkv` (`IdVegetal`,`IdVariedad`);
 
 --
 -- Indices de la tabla `unidad`
 --
 ALTER TABLE `unidad`
   ADD PRIMARY KEY (`IdUnidad`);
+
+--
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_cargo` (`id_cargo`);
 
 --
 -- Indices de la tabla `variedad`
@@ -439,14 +445,48 @@ ALTER TABLE `vegetal`
   ADD PRIMARY KEY (`IdVegetal`);
 
 --
--- Restricciones para tablas volcadas
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- Filtros para la tabla `almacena`
+-- AUTO_INCREMENT de la tabla `cargo`
 --
-ALTER TABLE `almacena`
-  ADD CONSTRAINT `fk_Avv` FOREIGN KEY (`IdVegetal`,`IdVariedad`) REFERENCES `variedad` (`IdVegetal`, `IdVariedad`);
+ALTER TABLE `cargo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `NroCliente` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Número único con el cual se identifica cada cliente';
+
+--
+-- AUTO_INCREMENT de la tabla `cosecha`
+--
+ALTER TABLE `cosecha`
+  MODIFY `IdHuerta` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Numero único con el cual se identifica cada huerta';
+
+--
+-- AUTO_INCREMENT de la tabla `huerta`
+--
+ALTER TABLE `huerta`
+  MODIFY `IdHuerta` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Numero único con el cual se identifica cada huerta';
+
+--
+-- AUTO_INCREMENT de la tabla `produce`
+--
+ALTER TABLE `produce`
+  MODIFY `IdHuerta` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Número único con el cual se identifica cada huerta';
+
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Restricciones para tablas volcadas
+--
 
 --
 -- Filtros para la tabla `asocia`
@@ -465,46 +505,58 @@ ALTER TABLE `calendario`
 -- Filtros para la tabla `clienteempresa`
 --
 ALTER TABLE `clienteempresa`
-  ADD CONSTRAINT `fk_CEmNro` FOREIGN KEY (`NroCliente`) REFERENCES `cliente` (`NroCliente`);
+  ADD CONSTRAINT `fkCliEm` FOREIGN KEY (`NroCliente`) REFERENCES `cliente` (`NroCliente`);
 
 --
 -- Filtros para la tabla `clientetel`
 --
 ALTER TABLE `clientetel`
-  ADD CONSTRAINT `fk_C.nro` FOREIGN KEY (`NroCliente`) REFERENCES `cliente` (`NroCliente`);
+  ADD CONSTRAINT `fkCli` FOREIGN KEY (`NroCliente`) REFERENCES `cliente` (`NroCliente`);
 
 --
 -- Filtros para la tabla `clienteweb`
 --
 ALTER TABLE `clienteweb`
-  ADD CONSTRAINT `fk_Cwebtel` FOREIGN KEY (`NroCliente`) REFERENCES `cliente` (`NroCliente`);
+  ADD CONSTRAINT `fkCLIW` FOREIGN KEY (`NroCliente`) REFERENCES `cliente` (`NroCliente`);
 
 --
 -- Filtros para la tabla `cosecha`
 --
 ALTER TABLE `cosecha`
-  ADD CONSTRAINT `fk_Ch` FOREIGN KEY (`IdHuerta`) REFERENCES `huerta` (`IdHuerta`),
-  ADD CONSTRAINT `fk_Cvv` FOREIGN KEY (`IdVegetal`,`IdVariedad`) REFERENCES `variedad` (`IdVegetal`, `IdVariedad`);
+  ADD CONSTRAINT `f_` FOREIGN KEY (`IdVegetal`) REFERENCES `vegetal` (`IdVegetal`),
+  ADD CONSTRAINT `fkh` FOREIGN KEY (`IdHuerta`) REFERENCES `huerta` (`IdHuerta`);
 
 --
 -- Filtros para la tabla `esta`
 --
 ALTER TABLE `esta`
-  ADD CONSTRAINT `fk_ENroO` FOREIGN KEY (`NroOrden`) REFERENCES `orden` (`NroOrden`),
+  ADD CONSTRAINT `f_n` FOREIGN KEY (`NroOrden`) REFERENCES `orden` (`NroOrden`),
   ADD CONSTRAINT `fk_Ee` FOREIGN KEY (`IdEstado`) REFERENCES `estado` (`IdEstado`);
 
 --
--- Filtros para la tabla `miden`
+-- Filtros para la tabla `pide`
 --
-ALTER TABLE `miden`
-  ADD CONSTRAINT `fk_Mu` FOREIGN KEY (`IdUnidad`) REFERENCES `unidad` (`IdUnidad`),
-  ADD CONSTRAINT `fk_Mvv` FOREIGN KEY (`IdVegetal`,`IdVariedad`) REFERENCES `variedad` (`IdVegetal`, `IdVariedad`);
+ALTER TABLE `pide`
+  ADD CONSTRAINT `fkvv` FOREIGN KEY (`IdVegetal`,`IdVariedad`) REFERENCES `variedad` (`IdVegetal`, `IdVariedad`);
 
 --
--- Filtros para la tabla `orden`
+-- Filtros para la tabla `produce`
 --
-ALTER TABLE `orden`
-  ADD CONSTRAINT `ff-vv` FOREIGN KEY (`IdVegetal`) REFERENCES `variedad` (`IdVegetal`);
+ALTER TABLE `produce`
+  ADD CONSTRAINT `f_hu` FOREIGN KEY (`IdHuerta`) REFERENCES `huerta` (`IdHuerta`),
+  ADD CONSTRAINT `fkVe` FOREIGN KEY (`IdVegetal`) REFERENCES `vegetal` (`IdVegetal`);
+
+--
+-- Filtros para la tabla `stock`
+--
+ALTER TABLE `stock`
+  ADD CONSTRAINT `fkv` FOREIGN KEY (`IdVegetal`,`IdVariedad`) REFERENCES `variedad` (`IdVegetal`, `IdVariedad`);
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_cargo`) REFERENCES `cargo` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `variedad`

@@ -1,6 +1,5 @@
 <?php
     require '../includes/funciones.php';
-
     $archivo = "head";
     $css = "registro";
     $titulo = "Sisgran - Registro";
@@ -26,7 +25,7 @@
             </div>
             <div class="formulario">
                 
-            <form id="cliente-web-formulario" class="cliente-web-formulario">
+            <form action="funciones.php" id="cliente-web-formulario" class="cliente-web-formulario">
                     <div class="campo-formulario campo-radio">
                         <input class="radio" type="radio" name="documento" id="ci" value="1" checked="checked">
                         <label>Cédula de identidad</label>
@@ -111,10 +110,10 @@
                         <label>Ingrese el barrio de su hogar:</label>
                         <input type="text" name="barrio" placeholder="Ej: La Blanqueada">
                     </div> <!-- FIN .campo-formulario  -->
-                    <input class="boton" type="submit" name="cliente-web" value="Registrarme">
+                    <input class="boton" type="submit"  value="Registrarme">
                 </form> <!-- FIN .cliente-web -->
 
-                <form id="cliente-empresa-formulario" class="cliente-empresa-formulario ocultar">
+                <form action="../includes/funciones.php" method="POST" id="cliente-empresa-formulario" class="cliente-empresa-formulario ocultar">
                     <div class="campo-formulario ">
                         <label>Ingrese el nombre de su empresa:</label>
                         <input type="text" name="nombre" placeholder="Ej: GeaTech S.A">
@@ -155,10 +154,10 @@
                         <label>Ingrese el barrio de su empresa:</label>
                         <input type="text" name="barrio" placeholder="Ej: La Blanqueada">
                     </div> <!-- FIN .campo-formulario  -->
-                    <input class="boton" type="submit" name="cliente-empresa" value="Registrarme">
+                    <input class="boton" type="submit"  value="Registrarme">
                 </form> <!-- FIN .cliente-empresa -->
 
-                <form id="huerta-ecologica-formulario" class="huerta-ecologica-formulario ocultar">
+                <form action="funciones.php" id="huerta-ecologica-formulario" class="huerta-ecologica-formulario ocultar">
                     <div class="campo-formulario ">
                         <label>Ingrese el nombre de su huerta:</label>
                         <input type="text" name="nombre" placeholder="Ej: Los Rosales">
@@ -195,23 +194,12 @@
                         <label>Ingrese el barrio de su huerta:</label>
                         <input type="text" name="barrio" placeholder="Ej: La Blanqueada">
                     </div> <!-- FIN .campo-formulario  -->
-                    <input class="boton" type="submit" name="huerta-ecologica" value="Registrarme">
+                    <input class="boton" type="submit"  value="Registrarme">
                 </form> <!-- FIN .huerta-ecologica -->
             </form> <!-- FIN .formulario -->
 
-            <?php
-
-            if(isset($_POST['cliente-web'])){
-                agregarClienteWeb();
-            }
-            else if(isset($_POST['cliente-empresa'])){
-                agregarClienteEmpresa();
-            }
-            else if(isset($_POST['huerta-ecologica'])){
-                agregarHuerta();
-            }
             
-            ?>
+             
 
         </div>
         <div class="pie-formulario">

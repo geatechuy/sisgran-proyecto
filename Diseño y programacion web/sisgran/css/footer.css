@@ -75,3 +75,7 @@
 .footer-geatech-info p a:hover{
     color: var(--verdeClaro);
 }
+
+.footer-sisgran, .footer-sobre-nosotros, .footer-contacto p{
+    text-align: justify;
+}

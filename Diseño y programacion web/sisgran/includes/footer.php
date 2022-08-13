@@ -8,7 +8,7 @@
         <div class="footer-grid">
             <div class="footer-sisgran">
                 <h3 class="footer-title">Sisgran</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi, ab.</p>
+                <p>Para aplicar a nuestra cooperativa debes enviar un mail detallando tus datos personales, una breve descripción de tu experienca laboral y tus habilidades.</p>
             </div>
             <div class="footer-sobre-nosotros">
                 <h3 class="footer-title">Sobre nosotros</h3>

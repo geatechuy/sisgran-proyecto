@@ -7,7 +7,7 @@
     $index = false;
     incluirArchivo($archivo, $css, $titulo, $index);
 
-    conexionBD("localhost", "lsanchez", "Leo9903!", "geatech");
+    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
 ?>
 
     <div id="carrito" class="carrito ocultar-carrito">
@@ -18,6 +18,8 @@
         <?php
             $productos = true;
             if($productos){
+
+            
             
         ?>
         <table class="productos-carrito">
@@ -89,7 +91,7 @@
         
         <div class="info-carrito">
             <p class="info-carrito-precio">Precio: <?php echo "$500"?> </p>
-            <p class="info-carrito-cantidad">Cantidad: <?php echo "25 productos" ?> </p>
+            <p class="info-carrito-cantidad">Cantidad: <?php echo "5 productos" ?> </p>
         </div>
         <div class="botones-carrito">
             <button class="boton limpiar-carrito">Limpiar carrito</button>

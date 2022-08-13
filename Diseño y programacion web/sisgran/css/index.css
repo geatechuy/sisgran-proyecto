@@ -98,6 +98,10 @@
     text-align: center;
 }
 
+.mision, .vision, .valores p{
+    text-align: justify;
+}
+
 .valores h3{
     text-align: center;
     padding: 15px 0;

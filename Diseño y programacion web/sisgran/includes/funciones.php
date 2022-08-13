@@ -13,11 +13,16 @@ function incluirArchivo($archivo, $css, $titulo, $index){
     }
 }
 
+
 // Función para conectarse a la base de datos
+$servidor = 'localhost';
+$usuario = 'root';
+$contraseña = '';
+$baseDatos = 'geatech';
 function conexionBD($servidor, $usuario, $contraseña, $baseDatos){
     // Crea la conexión con la base de datos
     $con = new mysqli($servidor, $usuario, $contraseña, $baseDatos);
-    
+    return $con;
     //Comprueba la conexión (descomentar solo en desarrollo, en producción no)
     //if ($con->connect_error) {
     //die("Conexión fallida: " . $con->connect_error);
@@ -27,7 +32,7 @@ function conexionBD($servidor, $usuario, $contraseña, $baseDatos){
 
 // Función para agregar cliente web
 function agregarClienteWeb(){
-    conexionBD();
+    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
     if($_POST){
         $CI = $_POST['documento'];
         $correo = $_POST['correo'];
@@ -37,30 +42,39 @@ function agregarClienteWeb(){
         $teléfono = $_POST['telefono'];
         $calle = $_POST['calle'];
         $puerta = $_POST['numero-puerta'];
-        $numero_apartamento = $_POST['###'];
+        $numero_apartamento = $_POST['numero-apartamento'];
         $esquina = $_POST['esquina'];
         $barrio = $_POST['barrio'];
     }
 
-    $sql = "INSERT INTO `clienteweb` (`Nombre`, `Apellido`, `CI`, 'Correo', `Calle` , 'Esquina' , 'NroApt' , 'NroPuerta', 'Tel') 
-            VALUES (NULL, '$nombre', '$apellido', '$CI', '$correo', '$calle', '$esquina', '$', '$puerta' , '$teléfono')";
+    $sql = "INSERT INTO `cliente` ('Correo', `Calle` , 'Esquina' , 'NroApt' , 'NroPuerta' , 'barrio') 
+            VALUES (NULL,'$correo', '$calle', '$esquina', '$numero_apartamento', '$puerta' , 'barrio')";
+
+    $sql = "INSERT INTO `clienteweb` ('Nombre', 'Apellido' , 'CI') 
+    VALUES (NULL,'$nombre', '$apellido', '$CI')";
+
+    $sql = "INSERT INTO `clientetel` ('Tel') 
+            VALUES (NULL,'$teléfono')";
+
+    $sql = "INSERT INTO `usuarios` ('contraseña') 
+            VALUES (NULL,'$contraseña')";
 
     if($con->query($sql) === TRUE) {
-        echo "Nuevo registro creado satisfactoriamente";
+        echo "Nuevo registro realizado con éxito, se le notificara por correo cuando su cuenta quede autorizada.";
     }else{
         echo "Error: " . $sql . "</n>" . $con->error;
     }
 }
 
 // Función para agregar cliente empresa
-function agregarClienteEmpresa(){
-    conexionBD();
+function agregarClienteEmpresa($nombre, $correo, $contraseña, $rut, $telefono, $calle, $puerta, $numero_apartamento, $esquina, $barrio){
+    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
     if($_POST){
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
         $contraseña = $_POST['contraseña'];
         $rut = $_POST['rut'];
-        $teléfono = $_POST['telefono'];
+        $telefono = $_POST['telefono'];
         $calle = $_POST['calle'];
         $puerta = $_POST['numero-puerta'];
         $numero_apartamento = $_POST['numero-apartamento'];
@@ -68,20 +82,29 @@ function agregarClienteEmpresa(){
         $barrio = $_POST['barrio'];
     }
     
-    $sql = "INSERT INTO `clienteempresa` (`Nombre`, `RUT`,`Calle` , 'Esquina', 'NroApt', 'NroPuerta' , 'Tel' , 'Correo') 
-            VALUES (NULL, '$nombre', '$rut', '$calle',  '$calle', '$esquina', '$numero_apartamento', '$puerta', '$teléfono', '$correo')";
+    $sql = "INSERT INTO `cliente` ('Correo', `Calle` , 'Esquina' , 'NroApt' , 'NroPuerta' , 'barrio') 
+            VALUES (NULL,'$correo', '$calle', '$esquina', '$numero_apartamento', '$puerta' , '$barrio')";
+
+    $sql = "INSERT INTO `clienteempresa` ('Nombre', 'RUT') 
+            VALUES (NULL,'$nombre' , '$rut')";
+
+    $sql = "INSERT INTO `clientetel` ('Tel') 
+            VALUES (NULL,'$telefono')";
+
+    $sql = "INSERT INTO `usuarios` ('contraseña') 
+            VALUES (NULL,'$contraseña')";
     
     if($con->query($sql) === TRUE) {
-        echo "Nuevo registro creado satisfactoriamente";
+        echo "Nuevo registro realizado con éxito, se le notificara por correo cuando su cuenta quede autorizada.";
     }
     else{
         echo "Error: " . $sql . "</n>" . $con->error;
     }
-}
 
+}
 // Función para agregar huerta ecológica
 function agregarHuerta(){
-    conexionBD();
+    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
     if($_POST){
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
@@ -93,51 +116,60 @@ function agregarHuerta(){
         $barrio = $_POST['barrio'];
     }
     
-    $sql = "INSERT INTO `clientehuerta` (`NombreHuerta`, `Calle`, `NroPuerta`, `Esquina`, 'Tel') 
-            VALUES (NULL, '$nombre', '$calle', '$puerta', '$esquina')";
+    $sql = "INSERT INTO `huerta` ('NombreHuerta', 'Calle' , 'NroPuerta' , 'Esquina' , 'Tel' , 'Correo' , 'barrio') 
+            VALUES (NULL,'$nombre' , '$calle' , '$puerta' , '$esquina' , '$teléfono' , '$correo' , '$barrio')";
+
+    $sql = "INSERT INTO `usuarios` ('contraseña') 
+            VALUES (NULL,'$contraseña')";
     
     if($con->query($sql) === TRUE) {
-        echo "Nuevo registro creado satisfactoriamente";
+        echo "Nuevo registro realizado con éxito, se le notificara por correo cuando su cuenta quede autorizada.";
     }
     else{
         echo "Error: " . $sql . "</n>" . $con->error;
     }
 }
 
-// Función para comprobar login empresa
-function comprobarLoginEmpresa(){
-    conexionBD();
-    $correo=$_POST['correo'];
-    $contraseña=$_POST['contraseña'];
-
-    $consulta="SELECT * FROM clienteempresa WHERE correo='correo' and contraseña='contraseña'";
-    $resultado=mysqli_query($con, $consulta);
-
+// Función para comprobar login 
+function comprobarLogin($servidor, $usuario, $contraseña, $baseDatos, $correo, $contraseñaUsuario){
+    $con = conexionBD($servidor, $usuario, $contraseña, $baseDatos);
+    $consulta="SELECT * FROM usuarios  WHERE correo='$correo' and contraseña='$contraseñaUsuario'";
+    $resultado=mysqli_query(conexionBD($servidor, $usuario, $contraseña, $baseDatos), $consulta);
     $filas=mysqli_fetch_array($resultado);
-
-    if ($filas['id_cargo']==1) {
-        header("location:");
-    }else
-    if($filas['id_cargo']==2){
-        header("location:");
-    }else
-    if($filas['id_cargo']==3){
-        header("location:");
-    }else
-    if($filas['id_cargo']==4){
-        header("location:");
-    }else
-    if($filas['id_cargo']==5){
-        header("location:");
+    
+    if(isset($filas)){
+        switch($filas['id_cargo']){
+            case 1:
+                header("location:tienda.php");
+            break;
+            case 2:
+                header("location:tienda.php");
+            break;
+            case 3:
+                header("location:tienda.php");
+            break;
+            case 4:
+                header("location:tienda.php");
+            break;
+            default:
+                ?> <h3 class="error_login">Error al inicar sesión</h3> <?php
+            break;
+        }
     }
-    
-    
-    else {
+    else{
         ?>
-        <?php
-        include("inicio-sesion.php");
-        ?>
-        <h3 class="error_loguin"> Error Usuario o Contraseña incorrecto </h3>
+            <div class="error-login">
+                <h3 class="error-login__texto">Error: Usuario o contraseña incorrecto</h3> 
+                <i id="cerrar-login" class="fa-solid fa-xmark error-login__cerrar"></i>
+            </div>
+            <div class="overlay"></div>
+            <script>
+                document.getElementById('cerrar-login').addEventListener('click', function(){
+                    document.querySelector('.error-login').style.display = 'none';
+                    document.querySelector('.overlay').style.display = 'none';
+                });
+            </script>
+
         <?php
     }
     mysqli_free_result($resultado);
@@ -146,7 +178,7 @@ function comprobarLoginEmpresa(){
 
 // Función para mostrar huertas
 function mostrarHuertas(){
-    conexionBD();
+    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
     $sql = "SELECT id, nombre, descripcion, precio FROM articulo";
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
