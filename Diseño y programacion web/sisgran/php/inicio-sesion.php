@@ -6,7 +6,7 @@
     $titulo = "Sisgran - Inicio de sesión";
     $index = false;
     incluirArchivo($archivo, $css, $titulo, $index);
-    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
+    conexionBD();
    
 ?>
 <body id="body">
@@ -31,8 +31,8 @@
             <?php
             if (isset($_POST['iniciar-sesion'])){
                 $correo=$_POST['correo'];
-                $contraseñaUsuario=$_POST['contraseña'];
-                comprobarLogin($servidor, $usuario, $contraseña, $baseDatos, $correo, $contraseñaUsuario);
+                $contraseña=$_POST['contraseña'];
+                comprobarLogin($correo, $contraseña);
             }
             ?>
             <div class="pie-formulario">

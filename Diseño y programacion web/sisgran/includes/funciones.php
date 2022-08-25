@@ -15,24 +15,28 @@ function incluirArchivo($archivo, $css, $titulo, $index){
 
 
 // Función para conectarse a la base de datos
-$servidor = 'localhost';
-$usuario = 'root';
-$contraseña = '';
-$baseDatos = 'geatech';
-function conexionBD($servidor, $usuario, $contraseña, $baseDatos){
+function conexionBD(){
+    // Define las variables de conexión
+    $servidor = 'localhost:3310';
+    $usuario = 'root';
+    $contraseña = '';
+    $baseDatos = 'geatech';
+
     // Crea la conexión con la base de datos
     $con = new mysqli($servidor, $usuario, $contraseña, $baseDatos);
-    return $con;
+
     //Comprueba la conexión (descomentar solo en desarrollo, en producción no)
-    //if ($con->connect_error) {
-    //die("Conexión fallida: " . $con->connect_error);
-    //}
-    //echo "Conectado con éxito";
+    // if ($con->connect_error) {
+    // die("Conexión fallida: " . $con->connect_error);
+    // }
+    // echo "Conectado con éxito";
+
+    return $con;
 }
 
-// Función para agregar cliente web
+// Función para agregar cliente web (NO FUNCIONA HAY QUE HACERLO DESDE 0)
 function agregarClienteWeb(){
-    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
+    conexionBD();
     if($_POST){
         $CI = $_POST['documento'];
         $correo = $_POST['correo'];
@@ -48,7 +52,7 @@ function agregarClienteWeb(){
     }
 
     $sql = "INSERT INTO `cliente` ('Correo', `Calle` , 'Esquina' , 'NroApt' , 'NroPuerta' , 'barrio') 
-            VALUES (NULL,'$correo', '$calle', '$esquina', '$numero_apartamento', '$puerta' , 'barrio')";
+            VALUES (NULL,'$correo', '$calle', '$esquina', '$numero_apartamento', '$puerta' , '$barrio')";
 
     $sql = "INSERT INTO `clienteweb` ('Nombre', 'Apellido' , 'CI') 
     VALUES (NULL,'$nombre', '$apellido', '$CI')";
@@ -66,9 +70,9 @@ function agregarClienteWeb(){
     }
 }
 
-// Función para agregar cliente empresa
-function agregarClienteEmpresa($nombre, $correo, $contraseña, $rut, $telefono, $calle, $puerta, $numero_apartamento, $esquina, $barrio){
-    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
+// Función para agregar cliente empresa (NO FUNCIONA HAY QUE HACERLO DESDE 0)
+function agregarClienteEmpresa(){
+    conexionBD();
     if($_POST){
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
@@ -102,9 +106,9 @@ function agregarClienteEmpresa($nombre, $correo, $contraseña, $rut, $telefono, 
     }
 
 }
-// Función para agregar huerta ecológica
+// Función para agregar huerta ecológica (NO FUNCIONA HAY QUE HACERLO DESDE 0)
 function agregarHuerta(){
-    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
+    conexionBD();
     if($_POST){
         $nombre = $_POST['nombre'];
         $correo = $_POST['correo'];
@@ -131,10 +135,10 @@ function agregarHuerta(){
 }
 
 // Función para comprobar login 
-function comprobarLogin($servidor, $usuario, $contraseña, $baseDatos, $correo, $contraseñaUsuario){
-    $con = conexionBD($servidor, $usuario, $contraseña, $baseDatos);
-    $consulta="SELECT * FROM usuarios  WHERE correo='$correo' and contraseña='$contraseñaUsuario'";
-    $resultado=mysqli_query(conexionBD($servidor, $usuario, $contraseña, $baseDatos), $consulta);
+function comprobarLogin($correo, $contraseña){
+    conexionBD();
+    $consulta="SELECT * FROM usuarios  WHERE correo='$correo' and contraseña='$contraseña'";
+    $resultado=mysqli_query(conexionBD(), $consulta);
     $filas=mysqli_fetch_array($resultado);
     
     if(isset($filas)){
@@ -173,12 +177,12 @@ function comprobarLogin($servidor, $usuario, $contraseña, $baseDatos, $correo, 
         <?php
     }
     mysqli_free_result($resultado);
-    mysqli_close($con);
+    mysqli_close(conexionBD());
 }
 
 // Función para mostrar huertas
 function mostrarHuertas(){
-    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
+    conexionBD();
     $sql = "SELECT id, nombre, descripcion, precio FROM articulo";
     $result = $con->query($sql);
     if ($result->num_rows > 0) {
@@ -197,8 +201,8 @@ function mostrarHuertas(){
     }
 }
 
-// Función para enviar un correo electrónico a sisgran2022@gmail.com
-function enviarCorreo($nombre, $email, $asunto, $mensaje){ // NO FUNCIONA TODAVÍA
+// Función para enviar un correo electrónico a sisgran2022@gmail.com (NO FUNCIONA)
+function enviarCorreo($nombre, $email, $asunto, $mensaje){
     $sisgran = 'sisgran2022@gmail.com';
 
     mail($sisgran, $asunto, $mensaje, "From: $nombre <$email>");

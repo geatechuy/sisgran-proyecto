@@ -113,7 +113,7 @@
                     <input class="boton" type="submit"  value="Registrarme">
                 </form> <!-- FIN .cliente-web -->
 
-                <form action="../includes/funciones.php" method="POST" id="cliente-empresa-formulario" class="cliente-empresa-formulario ocultar">
+                <form action="funciones.php" method="POST" id="cliente-empresa-formulario" class="cliente-empresa-formulario ocultar">
                     <div class="campo-formulario ">
                         <label>Ingrese el nombre de su empresa:</label>
                         <input type="text" name="nombre" placeholder="Ej: GeaTech S.A">

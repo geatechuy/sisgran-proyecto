@@ -7,7 +7,7 @@
     $index = false;
     incluirArchivo($archivo, $css, $titulo, $index);
 
-    conexionBD($servidor, $usuario, $contraseña, $baseDatos);
+    conexionBD();
 ?>
 
     <div id="carrito" class="carrito ocultar-carrito">

@@ -66,6 +66,7 @@
             </header>
         <?php break;
     }?>
+
 <!-- Si es la página principal -->
 <?php else: ?> 
     <!DOCTYPE html>
@@ -102,6 +103,3 @@
         </div>
     </header>
 <?php endif ?>
-
-
-    
