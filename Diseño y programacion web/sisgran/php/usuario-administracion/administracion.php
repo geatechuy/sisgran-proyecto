@@ -35,31 +35,31 @@
                 <ul class="navbar">
                     <li class="navbar-item">
                         <a href="#">
-                            <img class="item-img" src="assets/icons/huertas.svg" alt="Icono de huertas">
+                            <img class="item-img" src="assets/icons/huerta.svg" alt="Icono de huertas">
                             <p class="item-nombre">Huertas</p>
                         </a>
                     </li>
                     <li class="navbar-item">
                         <a href="#">
-                            <img class="item-img" src="assets/icons/clientes.svg" alt="Icono de clientes">
+                            <img class="item-img" src="assets/icons/cliente.svg" alt="Icono de clientes">
                             <p class="item-nombre">Clientes</p>
                         </a>
                     </li>
                     <li class="navbar-item">
                         <a href="#">  
-                            <img class="item-img" src="assets/icons/catalogo.png" alt="Icono de catalogo">
+                            <img class="item-img" src="assets/icons/catalogos.svg" alt="Icono de catalogo">
                             <p class="item-nombre">Catalogo</p>
                         </a>
                     </li>
                     <li class="navbar-item">
                         <a href="#">
-                            <img class="item-img" src="assets/icons/pedidos.svg" alt="Icono de pedidos">
+                            <img class="item-img" src="assets/icons/pedido.svg" alt="Icono de pedidos">
                             <p class="item-nombre">Pedidos</p>
                         </a>
                     </li>
                     <li class="navbar-item">
                         <a href="#">
-                            <img class="item-img" src="assets/icons/ventas.svg" alt="Icono de ventas">
+                            <img class="item-img" src="assets/icons/feria.svg" alt="Icono de ventas">
                             <p class="item-nombre">Ventas</p>
                         </a>
                     </li>
@@ -77,7 +77,7 @@
                         <p class="info-nombre">Huertas</p>
                     </div>
                     <div class="elemento-icono">
-                        <img src="assets/icons/huertas.svg" alt="Icono de huertas">
+                        <img src="assets/icons/huerta.svg" alt="Icono de huertas">
                     </div>
                 </div>
                 <!-- FIN ELEMENTO -->
@@ -88,7 +88,7 @@
                         <p class="info-nombre">Clientes</p>
                     </div>
                     <div class="elemento-icono">
-                        <img src="assets/icons/clientes.svg" alt="Icono de clientes">
+                        <img src="assets/icons/cliente.svg" alt="Icono de clientes">
                     </div>
                 </div>
                 <!-- FIN ELEMENTO -->
@@ -99,7 +99,7 @@
                         <p class="info-nombre">Empresas</p>
                     </div>
                     <div class="elemento-icono">
-                        <img src="assets/icons/empresas.svg" alt="Icono de empresas">
+                        <img src="assets/icons/empresa.svg" alt="Icono de empresas">
                     </div>
                 </div>
                 <!-- FIN ELEMENTO -->
@@ -110,7 +110,7 @@
                         <p class="info-nombre">Pedidos</p>
                     </div>
                     <div class="elemento-icono">
-                        <img src="assets/icons/pedidos.svg" alt="Icono de pedidos">
+                        <img src="assets/icons/pedido.svg" alt="Icono de pedidos">
                     </div>
                 </div>
                 <!-- FIN ELEMENTO -->
@@ -121,7 +121,7 @@
                         <p class="info-nombre">Ventas</p>
                     </div>
                     <div class="elemento-icono">
-                        <img src="assets/icons/ventas.svg" alt="Icono de ventas">
+                        <img src="assets/icons/venta.svg" alt="Icono de ventas">
                     </div>
                 </div>
                 <!-- FIN ELEMENTO -->
