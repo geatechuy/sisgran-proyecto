@@ -5,6 +5,8 @@
 }
 
 .grid__header{
+    position: fixed;
+    width: 100%;
     grid-area: header;
     height: 10vh;
     display: flex;
@@ -20,12 +22,13 @@
 
 .grid__nav{
     grid-area: nav;
+    position: fixed;
     height: 90vh;
     width: 20vw;
     display: flex;
     flex-direction: column;
     gap: 10px;
-    position: relative;
+    margin-top: 10vh;
 }
 
 .info-usuario{
@@ -104,8 +107,10 @@
 
 .grid__main{
     grid-area: main;
-    width: 80vw;
+    width: 75vw;
     height: 90vh;
+    margin-top: 10vh;
+    margin-left: 20vw;
 }
 
 .grid__main h1{

@@ -31,10 +31,6 @@
     height: auto;
 }
 
-.tooltip:after{
-    content: 'Volver al incio';
-}
-
 .titulo{
     font-weight: var(--bold);
     font-size: 30px;
@@ -84,4 +80,45 @@
     background-repeat: no-repeat;
     background-size: cover;
     overflow: hidden;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 1024px){
+    .contenedor-imagen{
+        display: none;
+    }
+
+    .contenedor-formulario{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 520px){
+    .logo{
+        width: 250px;
+        height: auto;
+    }
+
+    .titulo{
+        font-size: 20px;
+    }
+
+    .formulario{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .campo-formulario{
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .pie-formulario{
+        font-size: 15px;
+        text-align: center;
+    }
 }

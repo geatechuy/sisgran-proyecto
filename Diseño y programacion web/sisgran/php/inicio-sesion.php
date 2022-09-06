@@ -6,7 +6,8 @@
     $titulo = "Sisgran - Inicio de sesión";
     $index = false;
     incluirArchivo($archivo, $css, $titulo, $index);
-    conexionBD();
+    
+    include "../includes/conexion.php";
    
 ?>
 <body id="body">

@@ -133,6 +133,57 @@
     color: var(--verdeClaro);
 }
 
+/* RESPONSIVE */
+@media screen and (max-width: 1024px){
+    .contenedor-imagen{
+        display: none;
+    }
+
+    .contenedor-formulario{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 520px){
+    .logo{
+        width: 250px;
+        height: auto;
+    }
+
+    .titulo{
+        font-size: 20px;
+    }
+
+    .tipo-usuario li{
+        font-size: 15px;
+    }
+
+    .contenedor-formulario{
+        display: block;
+    }
+
+     .formulario{
+        height: 550px;
+        overflow-y: scroll;
+        margin-bottom: 15px;
+    }
+    
+    .campo-formulario{
+        display: flex;
+        flex-direction: column;
+        margin: 35px 0;
+    } 
+
+    .campo-radio{
+        flex-direction: row;
+    }
+
+    .pie-formulario{
+        font-size: 15px;
+        text-align: center;
+    }
+}
+
 /* UTILIDAD */
 .ocultar{
     display: none; 

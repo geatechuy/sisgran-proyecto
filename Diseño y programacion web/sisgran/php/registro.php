@@ -24,22 +24,21 @@
                 </ul>
             </div>
             <div class="formulario">
-                
-            <form action="funciones.php" id="cliente-web-formulario" class="cliente-web-formulario">
+                <form action="../includes/agregar-cliente-web.php" method="POST" id="cliente-web-formulario" class="cliente-web-formulario">
                     <div class="campo-formulario campo-radio">
-                        <input class="radio" type="radio" name="documento" id="ci" value="1" checked="checked">
+                        <input class="radio" type="radio" name="documento" id="ci" checked="checked">
                         <label>Cédula de identidad</label>
-                        <input class="radio" type="radio" name="documento" id="pasaporte" value="2">
+                        <input class="radio" type="radio" name="documento" id="pasaporte">
                         <label>Pasaporte</label>
                     </div> <!-- FIN .campo-formulario -->
                     <div class="campo-formulario ci">
                         <label>Ingrese su cédula de identidad:</label>
-                        <input type="number" placeholder="Ej: 58217530">
+                        <input type="number" name="ci" placeholder="Ej: 58217530">
                     </div> <!-- FIN .campo-formulario .ci -->
                     <div class="campo-formulario pasaporte ocultar">
                         <label>Ingrese su pasaporte:</label>
                         <div>
-                            <select>
+                            <select name="pasaporte-letra">
                                 <option value="1">A</option>
                                 <option value="2">B</option>
                                 <option value="3">C</option>
@@ -67,7 +66,7 @@
                                 <option value="25">Y</option>
                                 <option value="26">Z</option>
                             </select>
-                            <input type="number" placeholder="Ej: 677233">
+                            <input type="number" name="pasaporte-numeros" placeholder="Ej: 677233">
                         </div>
                     </div> <!-- FIN .campo-formulario .pasaporte -->
                     <div class="campo-formulario ">
@@ -110,10 +109,10 @@
                         <label>Ingrese el barrio de su hogar:</label>
                         <input type="text" name="barrio" placeholder="Ej: La Blanqueada">
                     </div> <!-- FIN .campo-formulario  -->
-                    <input class="boton" type="submit"  value="Registrarme">
+                    <input class="boton" type="submit" name="submit-web" value="Registrarme">
                 </form> <!-- FIN .cliente-web -->
 
-                <form action="funciones.php" method="POST" id="cliente-empresa-formulario" class="cliente-empresa-formulario ocultar">
+                <form action="../includes/agregar-cliente-empresa.php" method="POST" id="cliente-empresa-formulario" class="cliente-empresa-formulario ocultar">
                     <div class="campo-formulario ">
                         <label>Ingrese el nombre de su empresa:</label>
                         <input type="text" name="nombre" placeholder="Ej: GeaTech S.A">
@@ -154,10 +153,10 @@
                         <label>Ingrese el barrio de su empresa:</label>
                         <input type="text" name="barrio" placeholder="Ej: La Blanqueada">
                     </div> <!-- FIN .campo-formulario  -->
-                    <input class="boton" type="submit"  value="Registrarme">
+                    <input class="boton" type="submit" name="submit-empresa" value="Registrarme">
                 </form> <!-- FIN .cliente-empresa -->
 
-                <form action="funciones.php" id="huerta-ecologica-formulario" class="huerta-ecologica-formulario ocultar">
+                <form action="../includes/agregar-huerta.php" method="POST" id="huerta-ecologica-formulario" class="huerta-ecologica-formulario ocultar">
                     <div class="campo-formulario ">
                         <label>Ingrese el nombre de su huerta:</label>
                         <input type="text" name="nombre" placeholder="Ej: Los Rosales">
@@ -172,7 +171,7 @@
                     </div> <!-- FIN .campo-formulario  -->
                     <div class="campo-formulario ">
                         <label>Ingrese su teléfono:</label>
-                        <input type="tel" name="télefono" placeholder="Ej: 093921283">
+                        <input type="tel" name="telefono" placeholder="Ej: 093921283">
                     </div> <!-- FIN .campo-formulario  -->
                     <div class="campo-formulario ">
                         <label>Ingrese los mts<sup>2</sup> de su huerta:</label>
@@ -194,17 +193,13 @@
                         <label>Ingrese el barrio de su huerta:</label>
                         <input type="text" name="barrio" placeholder="Ej: La Blanqueada">
                     </div> <!-- FIN .campo-formulario  -->
-                    <input class="boton" type="submit"  value="Registrarme">
+                    <input class="boton" type="submit" name="submit-huerta" value="Registrarme">
                 </form> <!-- FIN .huerta-ecologica -->
-            </form> <!-- FIN .formulario -->
-
-            
-             
-
-        </div>
-        <div class="pie-formulario">
-            <a href="inicio-sesion.php">Ya tengo un usuario</a>
-            <p>Software made by <a target="_blank" href="https://geatech.vercel.app/">GeaTech</a> &copy; 2022</p>
+            </div>
+            <div class="pie-formulario">
+                <a href="inicio-sesion.php">Ya tengo un usuario</a>
+                <p>Software made by <a target="_blank" href="https://geatech.vercel.app/">GeaTech</a> &copy; 2022</p>
+            </div>
         </div>
     </main>
     <script src="../javascript/pantallaCarga.js"></script>

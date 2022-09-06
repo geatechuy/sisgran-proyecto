@@ -7,7 +7,7 @@
     $index = false;
     incluirArchivo($archivo, $css, $titulo, $index);
 
-    conexionBD();
+    include "../includes/conexion.php";
 ?>
 
     <div id="carrito" class="carrito ocultar-carrito">
@@ -101,6 +101,17 @@
     <main id="contenedor-tienda" class="contenedor">
         <h2 class="titulo-seccion">Tienda</h2>
         <div class="contenedor-tienda">
+            <?php
+
+                // Usar este código para automatizar la muestra de vegetales en la página web con la BD
+                $sql = "SELECT * FROM variedad";
+                $resultado = mysqli_query($con, $sql);
+
+                while($fila = mysqli_fetch_assoc($resultado)){
+                    // Mostrar vegetales
+                }
+
+                ?>
             <div class="producto">
                 <div class="producto-imagen">
                     <img src="../images/productos/acelga.png" alt="Acelga">

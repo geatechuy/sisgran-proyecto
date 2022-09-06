@@ -60,7 +60,7 @@
                 <?php }else{ ?>
                 <div class="carrito-cerrar-sesion">
                     <i id="carrito-icono" class="carrito-icono fa-solid fa-cart-shopping"></i>
-                    <a class="boton cerrar-sesion-boton" href="../index.php">Cerrar sesión</a>
+                    <a id ="cerrar-sesion" class="boton cerrar-sesion-boton" href="../index.php">Cerrar sesión</a>
                 </div>
                 <?php } ?>
             </header>

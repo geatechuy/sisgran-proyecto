@@ -12,6 +12,7 @@
 
     <!-- NUESTRO CSS -->
     <link rel="stylesheet" href="../../css/globales.css">
+    <link rel="stylesheet" href="../../css/header.css">
     <link rel="stylesheet" href="../../css/administrador.css">
 
     <link rel="shortcut icon" href="../../images/LogoColorHoja.png" type="image/png">
@@ -126,6 +127,11 @@
                 </div>
                 <!-- FIN ELEMENTO -->
                 
+                <!-- PRUEBA SCROLL SOLO EN MAIN DEJANDO EL HEADER Y EL NAV FIXED -->
+                <div style="overflow-x: hidden;">
+                    <!-- EJEMPLO SCROLL SOLO DE MAIN (BORRAR CUANDO YA HAYA CONTENIDO) -->
+                    <img src="assets/vegetales.jpg" alt="">
+                </div>
             </div>
         </main>
     </div>
