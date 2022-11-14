@@ -17,7 +17,7 @@
             <div class="footer-contacto">
                 <h3 class="footer-title">¡Contáctanos!</h3>
                 <p>Email: sisgran2022@gmail.com</p>
-                <p>Tlf: 2204 5199</p>
+                <p>Tel: 2204 5199</p>
                 <p>Cel: 093 912 754</p>
             </div>
             <div class="footer-logo">

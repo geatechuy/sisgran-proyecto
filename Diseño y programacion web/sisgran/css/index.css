@@ -106,3 +106,15 @@
     text-align: center;
     padding: 15px 0;
 }
+
+@media (max-width: 950px) {
+    .nuestros-productos{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 620px) {
+    .nuestros-productos{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

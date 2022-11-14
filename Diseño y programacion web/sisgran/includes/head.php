@@ -23,7 +23,8 @@
         <?php break;
         case 'contacto':
         case 'tienda':
-        case 'sobre-nosotros': // Si $css = contacto o $css = tienda o $css = sobre-nosotros ?>
+        case 'sobre-nosotros':
+        case 'mis-pedidos': // Si $css = contacto o $css = tienda o $css = sobre-nosotros o $css = mis-pedidos ?>
             <!DOCTYPE html>
             <html lang="es">
             <head>
@@ -52,23 +53,31 @@
                         <li> <a class="navegacion-enlace <?php if($css === "sobre-nosotros") echo 'activo'?>" href="sobre-nosotros.php">Sobre nosotros</a> </li>
                     </ul>
                 </nav>
-                <?php if($css != "tienda"){ ?> 
-                <div class="inicio-sesion-registro">
-                    <a class="boton inicio-sesion" href="inicio-sesion.php">Iniciar sesión</a>
-                    <a class="boton registro" href="registro.php">Registrarse</a>
-                </div>
-                <?php }else{ ?>
-                <div class="carrito-cerrar-sesion">
-                    <i id="carrito-icono" class="carrito-icono fa-solid fa-cart-shopping"></i>
-                    <a id ="cerrar-sesion" class="boton cerrar-sesion-boton" href="../index.php">Cerrar sesión</a>
-                </div>
-                <?php } ?>
-            </header>
-        <?php break;
-    }?>
+                <?php
+                    // Si NO existe una sesión iniciada muestra esto
+                    session_start();
+                    if(!isset($_SESSION['correo'])){
+                ?>
+                    <div class="inicio-sesion-registro">
+                        <a class="boton inicio-sesion" href="inicio-sesion.php">Iniciar sesión</a>
+                        <a class="boton registro" href="registro.php">Registrarse</a>
+                    </div>
+                    <?php
+                    // Si existe una sesión iniciada muestra esto
+                        }else{
+                    ?>
 
-<!-- Si es la página principal -->
-<?php else: ?> 
+                        <div class="carrito-cerrar-sesion">
+                            <a class="navegacion-enlace <?php if($css === "mis-pedidos") echo 'activo'?>" href="mis-pedidos.php">Mis pedidos</a>
+                            <i id="carrito-icono" class="carrito-icono fa-solid fa-cart-shopping"></i>
+                            <a id ="cerrar-sesion" class="boton cerrar-sesion-boton" href="../includes/cerrar-sesion.php">Cerrar sesión</a>
+                        </div>
+                    <?php } ?>
+            </header>
+    <?php break;}
+
+//  Si es la página principal 
+else: ?> 
     <!DOCTYPE html>
     <html lang="es">
     <head>
@@ -97,9 +106,22 @@
                 <li> <a class="navegacion-enlace" href="php/sobre-nosotros.php">Sobre nosotros</a> </li>
             </ul>
         </nav>
-        <div class="inicio-sesion-registro">
-            <a class="boton inicio-sesion" href="php/inicio-sesion.php">Iniciar sesión</a>
-            <a class="boton registro" href="php/registro.php">Registrarse</a>
-        </div>
+        <?php
+            session_start();
+            if(!isset($_SESSION['correo'])){
+        ?>
+                <div class="inicio-sesion-registro">
+                <a class="boton inicio-sesion" href="php/inicio-sesion.php">Iniciar sesión</a>
+                <a class="boton registro" href="php/registro.php">Registrarse</a>
+            </div>
+            <?php
+                }else{
+            ?>
+                    <div class="carrito-cerrar-sesion">
+                    <a class="mis-pedidos <?php if($css === "mis-pedidos") echo 'activo'?>" href="php/mis-pedidos.php">Mis pedidos</a>
+                    <i id="carrito-icono" class="carrito-icono fa-solid fa-cart-shopping"></i>
+                    <a id ="cerrar-sesion" class="boton cerrar-sesion-boton" href="includes/cerrar-sesion.php">Cerrar sesión</a>
+                </div>
+            <?php } ?>
     </header>
 <?php endif ?>

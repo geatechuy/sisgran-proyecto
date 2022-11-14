@@ -87,6 +87,11 @@ textarea{
     display: none; 
 }
 
+/* MOSTRAR ELEMENTOS */
+.mostrar{
+    display: block;
+}
+
 /* BOTON PAGINA ANTERIOR */
 .pagina-anterior{
     position: absolute;
@@ -210,3 +215,119 @@ textarea{
     background-color: rgba(0, 0, 0, 0.6);
 }
 
+/* CARRITO */
+body{
+    position: relative;
+}
+
+.ocultar-carrito{
+    transform: translateX(600px);
+}
+
+.mostrar-carrito{
+    transform: translateX(0px);
+}
+
+.carrito{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    background-color: var(--blanco);
+    box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    transition: transform .3s ease-in-out;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+}
+
+.cerrar-carrito{
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 15px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.cerrar-carrito:hover{
+    color: var(--verde);
+}
+
+.titulo-carrito{
+    text-align: center;
+    margin-top: 20px;
+    font-weight: var(--bold);
+}
+
+.subtitulo-carrito{
+    text-align: center;
+    margin: 5px 0;
+    font-weight: var(--bold);
+    color: var(--negroClaro);
+}
+
+.carrito-vacio{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.productos-carrito{
+    width: 100%;
+    margin-top: 10px;
+    text-align: center;
+    overflow: scroll;
+}
+
+.productos-carrito thead{
+    color: var(--verde);
+}
+
+.boton-producto{
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.boton-producto:hover{
+    color: var(--verde);
+}
+
+.info-carrito{
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.botones-carrito{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.mis-pedidos{
+    color: var(--verde);
+    font-weight: var(--semiBold);
+    transition: color .2s ease-in-out;
+}
+
+.mis-pedidos:hover{
+    color: var(--verdeClaro);
+}
+
+.siguiente-estado{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+}

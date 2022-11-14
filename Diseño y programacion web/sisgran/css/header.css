@@ -87,11 +87,28 @@
 }
 
 .carrito-icono{
-    font-size: 18px;
+    font-size: 25px;
     cursor: pointer;
 }
 
 .carrito-icono:hover{
     color: var(--verde);
     transition: color 0.2s ease-in-out;
+}
+
+@media (max-width: 950px) {
+    .cabecera{
+        flex-direction: column;
+        height: auto;
+    }
+
+    .inicio-sesion-registro, .carrito-cerrar-sesion{
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .navegacion{
+        flex-direction: column;
+    }
 }

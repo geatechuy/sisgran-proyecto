@@ -6,6 +6,8 @@
     $titulo = "Sisgran - Sobre nosotros";
     $index = false;
     incluirArchivo($archivo, $css, $titulo, $index);
+
+    include ('../includes/carrito.php');
 ?>
 
     <main class="contenedor">
@@ -25,6 +27,7 @@
     </main>
     <script src="../javascript/pantallaCarga.js"></script>
     <script src="../javascript/temaNavegador.js"></script>
+    <script src="../javascript/carrito.js"></script>
 
 <?php
     $archivo = "footer";

@@ -1,0 +1,49 @@
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.producto{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.imgProducto{
+    width: 300px;
+    margin: 15px 0;
+}
+
+.infoProducto{
+    display: flex;
+    gap: 8px;
+}
+
+.botonProducto{
+    display: flex;
+    gap: 5px;
+    padding: 5px;
+    border: 1px solid #e1e1e1;
+    background: none;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: border .2s ease-in-out;
+    border-radius: 3px;
+    color: #000;
+    text-decoration: none;
+}
+
+.botonProducto:hover{
+    border: 1px solid #9e9e9e;
+    background-color: var(--verde);
+    color: #fff;
+}
+
+.nombreProducto, .precioProducto{
+    padding: 5px;
+}

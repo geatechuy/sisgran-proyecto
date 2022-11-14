@@ -79,3 +79,15 @@
 .footer-sisgran, .footer-sobre-nosotros, .footer-contacto p{
     text-align: justify;
 }
+
+@media (max-width: 950px) {
+    .footer-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid{
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

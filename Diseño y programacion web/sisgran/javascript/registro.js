@@ -20,13 +20,11 @@ const formularioPasaporte = document.querySelector('.pasaporte');
 radioCi.addEventListener('click', function(){
     formularioCI.classList.remove('ocultar');
     formularioPasaporte.classList.add('ocultar');
-    console.log('ci');
 });
 
 radioPasaporte.addEventListener('click', function(){
     formularioCI.classList.add('ocultar');
     formularioPasaporte.classList.remove('ocultar');
-    console.log('pasaporte');
 });
 
 // Funciones para mostrar formularios
