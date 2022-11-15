@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 10, 2022 at 07:35 PM
+-- Generation Time: Nov 15, 2022 at 05:17 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -319,16 +319,16 @@ CREATE TABLE `esta` (
 --
 
 INSERT INTO `esta` (`NroOrden`, `FechaIni`, `FechaFin`, `IdEstado`) VALUES
-(1, '2022-11-06 11:06:02.2', '2022-11-06 11:06:02.0', 2),
 (1, '2022-11-06 11:06:09.0', NULL, 4),
 (1, '2022-11-06 11:06:09.6', '2022-11-06 11:06:09.0', 3),
+(1, '2022-11-14 15:16:46.2', '2022-11-13 15:16:37.0', 6),
 (2, '2022-11-06 11:06:08.1', '2022-11-06 11:06:08.0', 2),
 (2, '2022-11-06 11:06:10.9', '2022-11-06 11:06:10.0', 3),
-(2, '2022-11-06 11:23:13.5', '2022-11-06 11:23:13.0', 6),
 (2, '2022-11-06 11:25:05.3', '2022-11-06 11:25:05.0', 2),
 (2, '2022-11-06 11:31:34.5', '2022-11-06 11:31:34.0', 3),
 (2, '2022-11-10 03:12:15.0', NULL, 2),
 (2, '2022-11-10 15:12:15.0', '2022-11-10 03:12:15.0', 6),
+(2, '2022-11-14 15:29:20.1', '2022-11-06 11:23:13.0', 5),
 (3, '2022-11-06 11:24:39.6', '2022-11-06 11:24:39.0', 2),
 (3, '2022-11-06 11:24:41.1', '2022-11-06 11:24:41.0', 3),
 (3, '2022-11-06 11:24:54.5', '2022-11-06 11:24:54.0', 6),
@@ -381,7 +381,8 @@ CREATE TABLE `huerta` (
 
 INSERT INTO `huerta` (`IdHuerta`, `NombreHuerta`, `Calle`, `NroPuerta`, `Esquina`, `Tel`, `Correo`, `barrio`) VALUES
 (1, 'Reino vegetal', 'Pedernal', 2401, 'Juan Paullier', 92941188, 'huerta1@gmail.com', 'Jacinto Vera'),
-(2, 'Dulce creación', 'Carlos Tellier', 4912, 'Las Tunas', 92821323, 'huerta2@gmail.com', 'La Teja');
+(2, 'Dulce creación', 'Carlos Tellier', 4912, 'Las Tunas', 92821323, 'huerta2@gmail.com', 'La Teja'),
+(4, 'Mango', 'Camino Carrasco', 4210, 'Juliano', 97213047, 'huerta4@gmail.com', 'Carrasco');
 
 -- --------------------------------------------------------
 
@@ -391,11 +392,11 @@ INSERT INTO `huerta` (`IdHuerta`, `NombreHuerta`, `Calle`, `NroPuerta`, `Esquina
 
 CREATE TABLE `orden` (
   `NroOrden` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada Orden',
-  `NroCliente` int(3) NOT NULL,
+  `NroCliente` int(3) NOT NULL COMMENT 'Número único con el cuál se identifica cada cliente',
   `Fecha` datetime(1) NOT NULL COMMENT 'Fecha en la que se hacen las ordenes',
   `Autorizacion` int(1) NOT NULL COMMENT 'Autorización del pedido realizado',
-  `Met_Pago` varchar(30) NOT NULL,
-  `Hora_Ent` varchar(30) NOT NULL
+  `Met_Pago` varchar(30) NOT NULL COMMENT 'Método de pago elegido por el cliente',
+  `Hora_Ent` varchar(30) NOT NULL COMMENT 'Hora de entrega que elija el cliente'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -405,7 +406,8 @@ CREATE TABLE `orden` (
 INSERT INTO `orden` (`NroOrden`, `NroCliente`, `Fecha`, `Autorizacion`, `Met_Pago`, `Hora_Ent`) VALUES
 (1, 1, '2022-11-06 10:47:45.0', 1, 'Contado', '08:00 - 12:00'),
 (2, 2, '2022-11-06 11:04:56.0', 1, 'Tarjeta de débito', '16:00 - 20:00'),
-(3, 3, '2022-11-06 11:18:00.0', 1, 'Tarjeta de crédito', '16:00 - 20:00');
+(3, 3, '2022-11-06 11:18:00.0', 1, 'Tarjeta de crédito', '16:00 - 20:00'),
+(4, 1, '2022-11-15 11:50:41.0', 0, 'Contado', '08:00 - 12:00');
 
 -- --------------------------------------------------------
 
@@ -414,7 +416,7 @@ INSERT INTO `orden` (`NroOrden`, `NroCliente`, `Fecha`, `Autorizacion`, `Met_Pag
 --
 
 CREATE TABLE `pide` (
-  `NroOrden` int(3) DEFAULT NULL,
+  `NroOrden` int(3) DEFAULT NULL COMMENT 'Número unico con el cuál se identifica cada orden',
   `NroCliente` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada cliente',
   `IdVegetal` int(3) NOT NULL COMMENT 'Número único con el que se identifica cada vegetal',
   `IdVariedad` int(3) NOT NULL COMMENT 'Número único con el cual se identifica cada variedad',
@@ -429,6 +431,7 @@ CREATE TABLE `pide` (
 --
 
 INSERT INTO `pide` (`NroOrden`, `NroCliente`, `IdVegetal`, `IdVariedad`, `Fecha`, `Cant`, `PrecioUnitario`, `PrecioTotal`) VALUES
+(4, 1, 1, 1, '2022-11-15 11:50:41.0', 1, 50, 50),
 (1, 1, 3, 17, '2022-11-06 10:47:45.0', 1, 25, 25),
 (2, 2, 3, 17, '2022-11-06 11:04:56.0', 52, 25, 1300),
 (3, 3, 3, 17, '2022-11-06 11:18:00.0', 1, 25, 25);
@@ -446,7 +449,7 @@ CREATE TABLE `produce` (
   `Fecha` datetime NOT NULL COMMENT 'Fecha única en la que se producen los vegetales',
   `Cantidad` int(10) NOT NULL COMMENT 'Cantidad de productos plantados',
   `Estado` varchar(25) NOT NULL COMMENT 'Estado en el que se encunetra el cultivo',
-  `Estado_Post` char(1) NOT NULL
+  `Estado_Post` char(1) NOT NULL COMMENT 'Estado posterior al que va a pasar'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -459,6 +462,7 @@ INSERT INTO `produce` (`IdHuerta`, `IdVegetal`, `IdVariedad`, `Fecha`, `Cantidad
 (1, 1, 1, '2022-11-06 12:44:41', 1, 'Trasplantar', '0'),
 (1, 1, 1, '2022-11-06 12:44:43', 1, 'Cosechar', '0'),
 (1, 1, 1, '2022-11-10 03:11:22', 1, 'Sembrar', '1'),
+(1, 1, 1, '2022-11-14 01:46:07', 1, 'Sembrar', '1'),
 (1, 12, 6, '2022-11-02 01:30:31', 30, 'Sembrar', '0'),
 (1, 12, 6, '2022-11-06 11:53:46', 30, 'Germinar', '0'),
 (1, 12, 6, '2022-11-06 11:56:17', 30, 'Trasplantar', '0'),
@@ -467,6 +471,7 @@ INSERT INTO `produce` (`IdHuerta`, `IdVegetal`, `IdVariedad`, `Fecha`, `Cantidad
 (1, 12, 6, '2022-11-06 11:58:31', 100, 'Germinar', '0'),
 (1, 12, 6, '2022-11-06 11:58:32', 100, 'Trasplantar', '0'),
 (1, 12, 6, '2022-11-06 11:58:34', 100, 'Cosechar', '0'),
+(1, 12, 6, '2022-11-14 01:46:07', 1, 'Sembrar', '1'),
 (1, 30, 38, '2022-11-02 01:30:31', 20, 'Sembrar', '0'),
 (1, 30, 38, '2022-11-02 01:31:18', 20, 'Germinar', '0'),
 (1, 30, 38, '2022-11-02 01:31:31', 20, 'Trasplantar', '0'),
@@ -527,7 +532,7 @@ INSERT INTO `stock` (`IdVegetal`, `IdVariedad`, `CantActual`) VALUES
 (31, 14, 0),
 (20, 15, 0),
 (2, 16, 0),
-(3, 17, 46),
+(3, 17, 26),
 (20, 18, 0),
 (4, 19, 0),
 (10, 20, 0),
@@ -610,10 +615,11 @@ INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `Correo`, `contraseña`, `id
 (11, '', '', 'huerta2@gmail.com', '25f9e794323b453885f5181f1b624d0b', 5, 2),
 (12, 'Irene', 'Gonzalez', 'cliente1@gmail.com', '25f9e794323b453885f5181f1b624d0b', 6, 2),
 (13, 'Gerardo', 'Maza', 'cliente2@gmail.com', '25f9e794323b453885f5181f1b624d0b', 6, 2),
-(14, 'Polticor', '', 'empresa1@gmail.com', '25f9e794323b453885f5181f1b624d0b', 6, 2),
+(14, 'Polticor', '', 'empresa1@gmail.com', '25f9e794323b453885f5181f1b624d0b', 6, 0),
 (15, 'Eskil S.A.', '', 'empresa2@gmail.com', '25f9e794323b453885f5181f1b624d0b', 6, 2),
 (16, 'Matías', 'Gonzalez', 'cadete1@gmail.com', '25f9e794323b453885f5181f1b624d0b', 4, 2),
-(17, 'Tatiana', 'Requena', 'cadete2@gmail.com', '25f9e794323b453885f5181f1b624d0b', 4, 2);
+(17, 'Tatiana', 'Requena', 'cadete2@gmail.com', '25f9e794323b453885f5181f1b624d0b', 4, 2),
+(19, 'Mango', '', 'huerta4@gmail.com', '25f9e794323b453885f5181f1b624d0b', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -755,14 +761,14 @@ ALTER TABLE `cargo`
 -- Indexes for table `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`NroCliente`,`Correo`),
+  ADD PRIMARY KEY (`NroCliente`,`Correo`) USING BTREE COMMENT 'Número único con el cual se identifica cada cliente y correo único para cada cliente',
   ADD UNIQUE KEY `Correo` (`Correo`) USING BTREE COMMENT 'Correo único  para cada cliente';
 
 --
 -- Indexes for table `clienteempresa`
 --
 ALTER TABLE `clienteempresa`
-  ADD PRIMARY KEY (`NroCliente`);
+  ADD PRIMARY KEY (`NroCliente`) USING BTREE COMMENT 'Número único con el cual se identifican los clientes';
 
 --
 -- Indexes for table `clientetel`
@@ -774,15 +780,15 @@ ALTER TABLE `clientetel`
 -- Indexes for table `clienteweb`
 --
 ALTER TABLE `clienteweb`
-  ADD PRIMARY KEY (`NroCliente`);
+  ADD PRIMARY KEY (`NroCliente`) USING BTREE COMMENT 'Número único con el cual se identifican los clientes';
 
 --
 -- Indexes for table `cosecha`
 --
 ALTER TABLE `cosecha`
-  ADD PRIMARY KEY (`IdHuerta`,`IdVegetal`,`IdVariedad`,`Fecha`),
-  ADD KEY `ff` (`IdVegetal`,`IdVariedad`),
-  ADD KEY `f` (`Unidad`);
+  ADD PRIMARY KEY (`IdHuerta`,`IdVegetal`,`IdVariedad`,`Fecha`) USING BTREE COMMENT 'Valores único con el cual se identifican las huertas, los vegetales, las variedades y las fecha',
+  ADD KEY `ff` (`IdVegetal`,`IdVariedad`) USING BTREE COMMENT 'IdVegetal y IdVariedad que hacen referencia a los mismos en variedad',
+  ADD KEY `f` (`Unidad`) USING BTREE COMMENT 'Unidad que hace referencia a el mismo en variedad';
 
 --
 -- Indexes for table `esta`
@@ -808,24 +814,24 @@ ALTER TABLE `huerta`
 --
 ALTER TABLE `orden`
   ADD PRIMARY KEY (`NroOrden`) USING BTREE COMMENT 'Número único con el cual se identifica cada orden',
-  ADD KEY `fk_cl` (`NroCliente`);
+  ADD KEY `fk_cl` (`NroCliente`) USING BTREE COMMENT 'NroCliente que hace referencia a el mismo en cliente';
 
 --
 -- Indexes for table `pide`
 --
 ALTER TABLE `pide`
-  ADD PRIMARY KEY (`IdVariedad`,`NroCliente`,`Fecha`,`IdVegetal`) USING BTREE,
+  ADD PRIMARY KEY (`IdVariedad`,`NroCliente`,`Fecha`,`IdVegetal`) USING BTREE COMMENT 'Valores único con el cual se identifican las variedades, los clientes, los vegetales y las fecha',
   ADD KEY `fkvv` (`IdVegetal`,`IdVariedad`) USING BTREE COMMENT 'Clave Foranea de (IdVegetal, IdVariedad) que que hace referencia a variedad (IdVegetal, IdVariedad)',
   ADD KEY `f_m` (`NroCliente`) USING BTREE COMMENT 'Clave Foranea de (NroCliente) que que hace referencia a cliente (NroCliente)',
-  ADD KEY `fk_orde` (`NroOrden`);
+  ADD KEY `fk_orde` (`NroOrden`) USING BTREE COMMENT 'NroOrden que hace referencia a el mismo en orden';
 
 --
 -- Indexes for table `produce`
 --
 ALTER TABLE `produce`
-  ADD PRIMARY KEY (`IdHuerta`,`IdVegetal`,`IdVariedad`,`Fecha`),
+  ADD PRIMARY KEY (`IdHuerta`,`IdVegetal`,`IdVariedad`,`Fecha`) USING BTREE COMMENT 'Valores único con el cual se identifican las huertas, los vegetales, las variedades y las fecha',
   ADD KEY `fkVe` (`IdVegetal`) USING BTREE COMMENT 'Clave Foranea de (IdVegetal) que que hace referencia a vegetal (IdVegetal)',
-  ADD KEY `fk_va` (`IdVegetal`,`IdVariedad`);
+  ADD KEY `fk_va` (`IdVegetal`,`IdVariedad`) USING BTREE COMMENT 'IdVegetal y IdVariedad que hacen referencia a los mismos en variedad';
 
 --
 -- Indexes for table `repartidor`
@@ -851,7 +857,7 @@ ALTER TABLE `unidad`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id`) USING BTREE COMMENT 'Id único de cada usuario',
-  ADD KEY `id_cargo` (`id_cargo`);
+  ADD KEY `id_cargo` (`id_cargo`) USING BTREE COMMENT 'Cargo único de cada usuario';
 
 --
 -- Indexes for table `variedad`
@@ -892,13 +898,13 @@ ALTER TABLE `estado`
 -- AUTO_INCREMENT for table `huerta`
 --
 ALTER TABLE `huerta`
-  MODIFY `IdHuerta` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Numero único con el cual se identifica cada huerta', AUTO_INCREMENT=3;
+  MODIFY `IdHuerta` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Numero único con el cual se identifica cada huerta', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `orden`
 --
 ALTER TABLE `orden`
-  MODIFY `NroOrden` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Número único con el cual se identifica cada Orden', AUTO_INCREMENT=4;
+  MODIFY `NroOrden` int(3) NOT NULL AUTO_INCREMENT COMMENT 'Número único con el cual se identifica cada Orden', AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `produce`
@@ -910,7 +916,7 @@ ALTER TABLE `produce`
 -- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id único de cada usuario', AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Id único de cada usuario', AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
