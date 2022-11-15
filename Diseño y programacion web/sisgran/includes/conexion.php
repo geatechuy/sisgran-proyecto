@@ -1,6 +1,6 @@
 <?php
     // Define las variables de conexión
-    $DB_servidor = 'localhost:3310';
+    $DB_servidor = 'localhost';
     $DB_usuario = 'root';
     $DB_contraseña = '';
     $DB_nombre = 'geatech';
